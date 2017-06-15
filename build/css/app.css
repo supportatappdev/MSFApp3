@@ -13726,7 +13726,7 @@ body.canvas-menu .profile-element {
 }
 
 body:not(.fixed-sidebar):not(.canvas-menu).mini-navbar .nav-second-level {
-  //display: none;
+ /*display: none;*/
 }
 
 body.mini-navbar .navbar-default .nav > li > a {
