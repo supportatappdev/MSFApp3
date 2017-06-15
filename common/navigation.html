@@ -1,32 +1,34 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
-        <ul side-navigation class="nav" id="side-menu">
+        <ul side-navigation class="nav" id="side-menu" style="width:220px" >
             <li class="nav-header">
-
-                <div class="dropdown profile-element" dropdown>
-                    <a class="dropdown-toggle" dropdown-toggle href>
-                            <span class="clear">
-                                <span class="block m-t-xs">
-                                    <strong class="font-bold">{{main.userName}}</strong>
-                             </span>
-                                <span class="text-muted text-xs block">Example menu<b class="caret"></b></span>
-                            </span>
-                    </a>
-                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="">Logout</a></li>
-                    </ul>
-                </div>
+            <!--<div class="dropdown profile-element" dropdown="">-->
+            <!--        <img alt="image" class="img-circle" src="img/profile_small.jpg">-->
+            <!--    </div>-->
                 <div class="logo-element">
-                    IN+
+                    <i class="fa fa-user"></i> {{user.D_N}}
                 </div>
 
             </li>
 
             <li ui-sref-active="active">
-                <a ui-sref="index.main"><i class="fa fa-laptop"></i> <span class="nav-label">Main page</span> </a>
+                <a ui-sref="index.main"><i class="fa fa-laptop"></i> <span class="nav-label">Journey Plan</span> </a>
             </li>
+             <li ui-sref-active="active">
+            <a href="#"><i class="fa fa-users"></i>
+            <span class="nav-label">Customers   <i class="fa fa-chevron-right"></i></span></a>
+            <ul class="nav nav-second-level collapse" style="height: 0px;">
+               <li ui-sref-active="active">
+                  <a ui-sref="index.setup"><i class="fa fa-bars"></i> <span class="nav-label">Customer List</span></a>
+               </li>
+               <li ui-sref-active="active">
+                  <a ui-sref="index.setupcustomer"><i class="fa fa-users"></i> <span class="nav-label">Create Customer</span></a>
+               </li>
+             
+            </ul>
+         </li>
             <li ui-sref-active="active">
-                <a ui-sref="index.minor"><i class="fa fa-desktop"></i> <span class="nav-label">Minor page</span></a>
+                <a ui-sref="index.minor"><i class="fa fa-desktop"></i> <span class="nav-label">Customers <i class="fa fa-chevron"></i></span></a>
             </li>
         </ul>
 
