@@ -1,6 +1,6 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
-        <ul side-navigation class="nav" id="side-menu" style="width:220px" >
+        <ul side-navigation class="nav" id="side-menu" style="width:170px" >
             <li class="nav-header">
             <!--<div class="dropdown profile-element" dropdown="">-->
             <!--        <img alt="image" class="img-circle" src="img/profile_small.jpg">-->
@@ -12,23 +12,40 @@
             </li>
 
             <li ui-sref-active="active">
-                <a ui-sref="index.main"><i class="fa fa-laptop"></i> <span class="nav-label">Journey Plan</span> </a>
+                <a ui-sref="index.main"><i class="fa fa-calendar"></i> <span class="nav-label">Journey Plan</span> </a>
             </li>
              <li ui-sref-active="active">
-            <a href="#"><i class="fa fa-users"></i>
-            <span class="nav-label">Customers   <i class="fa fa-chevron-right"></i></span></a>
+                <a href="#"><i class="fa fa-users"></i>
+            <span class="nav-label">Customers   <span class="m-r-xs"></span><i class="fa fa-chevron-right"></i></span></a>
+                <ul class="nav nav-second-level collapse" style="height: 0px;">
+               <li ui-sref-active="active">
+                  <a ui-sref="index.setup"><i class="fa fa-bars"></i> <span class="nav-label">Customer List</span></a>
+               </li>
+               <li ui-sref-active="active">
+                  <a ui-sref="index.setupcustomer"><i class="fa fa-plus"></i> <span class="nav-label">Add Customer</span></a>
+               </li>
+             
+            </ul>
+             </li>
+             <li ui-sref-active="active">
+            <a href="#"><i class="fa fa-building-o"></i>
+            <span class="nav-label">Exe Summary   <span class="m-r-xs"></span><i class="fa fa-chevron-right"></i></span></a>
             <ul class="nav nav-second-level collapse" style="height: 0px;">
                <li ui-sref-active="active">
                   <a ui-sref="index.setup"><i class="fa fa-bars"></i> <span class="nav-label">Customer List</span></a>
                </li>
                <li ui-sref-active="active">
-                  <a ui-sref="index.setupcustomer"><i class="fa fa-users"></i> <span class="nav-label">Create Customer</span></a>
+                  <a ui-sref="index.setupcustomer"><i class="fa fa-plus"></i> <span class="nav-label">Add Customer</span></a>
                </li>
              
             </ul>
          </li>
+         
             <li ui-sref-active="active">
-                <a ui-sref="index.minor"><i class="fa fa-desktop"></i> <span class="nav-label">Customers <i class="fa fa-chevron"></i></span></a>
+                <a ui-sref="index.minor"><i class="fa fa-truck"></i> <span class="nav-label">EOD </span></a>
+            </li>
+             <li ui-sref-active="active">
+                <a ng-click="logout()"><i class="fa fa-sign-out"></i> <span class="nav-label">Logout</span></a>
             </li>
         </ul>
 
