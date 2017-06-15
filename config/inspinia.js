@@ -27,7 +27,7 @@ $(document).ready(function () {
 
     $(window).bind("load resize scroll", function() {
         if(!$("body").hasClass('body-small')) {
-                fix_height();
+                //fix_height();
         }
     })
 
@@ -49,11 +49,11 @@ $(document).ready(function () {
 // Minimalize menu when screen is less than 768px
 $(function() {
 	$('body').addClass('skin-3');
-    // $(window).bind("load resize", function() {
-    //     if ($(this).width() < 769) {
-    //         $('body').addClass('body-small')
-    //     } else {
-    //         $('body').removeClass('body-small')
-    //     }
-    // })
+    $(window).bind("load resize", function() {
+        if ($(this).width() < 769) {
+            $('body').addClass('body-small')
+        } else {
+            $('body').removeClass('body-small')
+        }
+    })
 })
