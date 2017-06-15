@@ -75,7 +75,7 @@ function minimalizaSidebar($timeout) {
         controller: function ($scope, $element) {
             $scope.minimalize = function () {
                 $("body").toggleClass("mini-navbar");
-                if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
+                if (!$('body').hasClass('mini-navbar') ) {
                     // Hide menu in order to smoothly turn on when maximize menu
                     $('#side-menu').hide();
                     // For smoothly turn on menu
@@ -83,7 +83,7 @@ function minimalizaSidebar($timeout) {
                         function () {
                             $('#side-menu').fadeIn(500);
                         }, 100);
-                } else if ($('body').hasClass('fixed-sidebar')){
+                } else if ($('body').hasClass('fixed-sidebar') || $('body').hasClass('body-small')){
                     $('#side-menu').hide();
                     setTimeout(
                         function () {
