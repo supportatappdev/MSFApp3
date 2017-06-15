@@ -10,6 +10,7 @@ angular
     if(!Cache.loggedInUser()) {
        $scope.showLogin = true;
     } else {
+      $scope.user = Cache.loggedInUser()
         console.log(Cache.loggedInUser());
         $scope.showLogin = false;
         $location.path("/index/main");
