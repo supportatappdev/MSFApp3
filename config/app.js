@@ -6,8 +6,10 @@
         'ui.router',                    // Routing
         'oc.lazyLoad',                  // ocLazyLoad
         'ui.bootstrap',                 // Ui Bootstrap
-         'cgNotify',
-          'oitozero.ngSweetAlert' 
+        'datePicker',
+        'cgNotify',
+        'ngResource',
+        'oitozero.ngSweetAlert' 
     ])
 })();
 
