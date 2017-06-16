@@ -4,12 +4,12 @@ function custconfig($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         .state('index.addcust', {
             url: "/addcust",
             templateUrl: "customer/add.html",
-            data: { pageTitle: 'New Retailer' }
+            data: { pageTitle: 'Add Customer' }
         })
         .state('index.listcust', {
             url: "/listcust",
-            templateUrl: "customer/retailers.html",
-            data: { pageTitle: 'My Retailers' }
+            templateUrl: "retailsers.html",
+            data: { pageTitle: 'Customers' }
         })
 }
 angular
