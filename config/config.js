@@ -23,7 +23,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         .state('index.main', {
             url: "/main",
             templateUrl: "main.html",
-            data: { pageTitle: 'Example view' }
+            data: { pageTitle: 'Journey Plan' }
         })
         .state('index.minor', {
             url: "/minor",
