@@ -25,7 +25,7 @@
 		</div>
 		<h3>Mobile Sales Force</h3>
 		<p>Login in. To see it in action.</p>
-		<p>
+		<p>{{_appUrl}}'/api/login'
 		<div ng-show="responseDetails.length > 0" class="alert alert-error"  style="padding:0px 5px 1px 1px">
 			<font color="red"><ul><li>{{responseDetails}}</li></ul></font>
 		</div>
@@ -61,11 +61,12 @@
 <!-- Anglar App Script -->
 <script src="config/app.js"></script>
 <script src="login/config.js"></script>
+<script src="customer/config.js"></script>
 <script src="config/config.js"></script>
 <script src="config/service.js"></script>
 <script src="config/directives.js"></script>
 <script src="config/controllers.js"></script>
-<script src="login/ctrl.js"></script>
+<script src="customer/ctrl.js"></script>
 
 </body>
 </html>
