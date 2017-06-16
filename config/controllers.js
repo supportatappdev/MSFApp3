@@ -7,7 +7,7 @@ angular
         $scope._appUrl = _appUrl;
 //var _appUrl = "http://ec2-54-80-147-67.compute-1.amazonaws.com:8180";//getBaseURL()+getAppName(window.location.pathname);
   $scope.pageTitle = "Journey Plan";
-    if(!Cache.loggedInUser()) {
+    if(!Cache.loggedInUser()) {  
        $scope.showLogin = true;
     } else {
       $scope.user = Cache.loggedInUser()
