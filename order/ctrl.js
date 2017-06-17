@@ -11,7 +11,7 @@ function OrderCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil,$moda
     $scope.openLineItems = function(row) {
         $scope.inv = row;
         var modalInstance = $modal.open({
-            templateUrl: 'orders/orddet.html',
+            templateUrl: 'order/orderdet.html',
             size: "lg",
             scope: $scope,
             controller: lineItemCntrl
