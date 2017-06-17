@@ -1,25 +1,64 @@
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CustCtrl">
-    <div class="row">
-                <div class="panel-body">
-                <table class="table table-bordered">
-                    <tbody>
-                    <div class="ibox-content">
-                    <div class="feed-activity-list">
-                    <tr ng-repeat='cts in spRetailList'>
-                    <td>
-                    <div class="feed-element">
-                    <div>
-                        <strong>{{cts.cust_name}} </strong>[{{cts.cust_code}}]
-                        <div>{{cts.addr_line1}}</div>
-                        <div>{{cts.route_name}}</div>
+<div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="search-form">
+                        <form  >
+                            <div class="input-group col-lg-12">
+                                <input type="text" placeholder="Search by Customer Name/Customer Code" ng-model="search" name="search" class="form-control input-lg">
+                            </div>
+
+                        </form>
                     </div>
+                    <div class="hr-line-dashed"></div>
+                    <div ng-repeat='cts in spRetailList | filter:search'>
+                    <div class="search-result">
+                        <h3><a href="">{{cts.cust_name}}</a></h3>
+                        <a  class="search-link">[{{cts.cust_code}}]</a>
+                        <p>
+                          {{cts.addr_line1}}
+                          {{cts.route_name}}
+                         </p>
                     </div>
-                    </td>
-                    </tr>
+                    <div class="hr-line-dashed"></div>
+                   </div>
+                    <div class="text-center">
+                        <div class="btn-group">
+                            <button class="btn btn-white" type="button"><i class="fa fa-chevron-left"></i></button>
+                            <button class="btn btn-white">1</button>
+                            <button class="btn btn-white  active">2</button>
+                            <button class="btn btn-white">3</button>
+                            <button class="btn btn-white">4</button>
+                            <button class="btn btn-white">5</button>
+                            <button class="btn btn-white">6</button>
+                            <button class="btn btn-white">7</button>
+                            <button class="btn btn-white" type="button"><i class="fa fa-chevron-right"></i></button>
+                        </div>
                     </div>
-                    </div>
-                    </tbody>
-                </table>
                 </div>
             </div>
+</div>
+    <!--<div class="row">-->
+    <!--            <div class="panel-body">-->
+    <!--            <table class="table table-bordered">-->
+    <!--                <tbody>-->
+    <!--                <div class="ibox-content">-->
+    <!--                <div class="feed-activity-list">-->
+    <!--                <tr ng-repeat='cts in spRetailList'>-->
+    <!--                <td>-->
+    <!--                <div class="feed-element">-->
+    <!--                <div>-->
+    <!--                    <strong>{{cts.cust_name}} </strong>[{{cts.cust_code}}]-->
+    <!--                    <div>{{cts.addr_line1}}</div>-->
+    <!--                    <div>{{cts.route_name}}</div>-->
+    <!--                </div>-->
+    <!--                </div>-->
+    <!--                </td>-->
+    <!--                </tr>-->
+    <!--                </div>-->
+    <!--                </div>-->
+    <!--                </tbody>-->
+    <!--            </table>-->
+    <!--            </div>-->
+    <!--        </div>-->
 </div>
