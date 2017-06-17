@@ -12,7 +12,7 @@ function OrderCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil,$moda
         $scope.inv = row;
         var modalInstance = $modal.open({
             templateUrl: 'order/orderdet.html',
-            size: "lg",
+            size: "sm",
             scope: $scope,
             controller: lineItemCntrl
         });
