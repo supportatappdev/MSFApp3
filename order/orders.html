@@ -1,0 +1,32 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="OrderCtrl">
+    <div class="row">
+                <div class="panel-body">
+                <table class="table table-bordered">
+                    <tbody>
+                    <div class="ibox-content">
+                    <div class="feed-activity-list">
+                    <tr ng-repeat='o in orderList'>
+                    <td>
+                    <div class="feed-element">
+                              <!--td ><a ng-click="openLineItems(ct)">{{ct.order_no}}</a></td-->
+                    <div>
+                        <a ng-click="openLineItems(o)">
+                        <strong>Order No: {{o.order_no}} </strong>
+                        <div>{{o.cust_name}} [{{o.cust_code}}] </div>
+                        <div>{{o.addr_line1}}</div>
+                        <div> 
+                        <small class="pull-right text-navy">Invoice Amount: {{o.order_amount}}</small>
+                        Date: {{o.creation_date | date:'dd/MM/yyyy'}}
+                        </div>
+                        </a>
+                    </div>
+                    </div>
+                    </td>
+                    </tr>
+                    </div>
+                    </div>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+</div>
