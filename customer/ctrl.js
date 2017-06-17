@@ -9,7 +9,9 @@ function CustCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil) {
         wc = "spid = 11";//sp.salesperson
         //wcParams = [parseInt($scope.sp.salesperson)];
         BSServiceUtil.queryResultWithCallback("SFSPRetailJPViewRef", "_NOCACHE_", wc, undefined, undefined, spRetailJPResult);
+       $scope.retailListLoading = true;
         var spRetailResult = function(result) {
+            $scope.retailListLoading = false;
             $scope.spRetailList = result;
         }
         wc = "spid = 11";//sp.salesperson
