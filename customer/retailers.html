@@ -2,24 +2,22 @@
     <div class="row">
                 <div class="panel-body">
                 <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Retailer Code</th>
-                        <th>Retailer Name</th>
-                        <th class="hidden-xs">Adress</th>
-                        <th>Beat Name</th>
-                    </tr>
-                    </thead>
-                    </thead>
                     <tbody>
-                    <tr ng-repeat='ct in spRetailList'>
-                    <td >{{$index+1}}</td>
-                    <td >{{ct.cust_code}}</td>
-                    <td >{{ct.cust_name}}</td>
-                    <td class="hidden-xs">{{ct.addr_line1}}</td>
-                    <td >{{ct.route_name}}</td>
+                    <div class="ibox-content">
+                    <div class="feed-activity-list">
+                    <tr ng-repeat='cts in spRetailList'>
+                    <td>
+                    <div class="feed-element">
+                    <div>
+                        <strong>{{cts.cust_name}} </strong>[{{cts.cust_code}}]
+                        <div>{{cts.addr_line1}}</div>
+                        <div>{{cts.route_name}}</div>
+                    </div>
+                    </div>
+                    </td>
                     </tr>
+                    </div>
+                    </div>
                     </tbody>
                 </table>
                 </div>
