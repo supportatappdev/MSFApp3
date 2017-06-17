@@ -12,6 +12,7 @@
                         </form>
                     </div>
                     <div class="hr-line-dashed"></div>
+                    <div class="text-center"><i class="fa fa-spin fa-spinner fa-2x" ng-show="retailListLoading"></i></div>
                     <div ng-repeat='cts in spRetailList | filter:search'>
                     <div class="search-result">
                         <h3><a href="">{{cts.cust_name}}</a></h3>
@@ -23,7 +24,7 @@
                     </div>
                     <div class="hr-line-dashed"></div>
                    </div>
-                    <div class="text-center">
+                    <div class="text-center" ng-hide="retailListLoading">
                         <div class="btn-group">
                             <button class="btn btn-white" type="button"><i class="fa fa-chevron-left"></i></button>
                             <button class="btn btn-white">1</button>
