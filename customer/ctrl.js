@@ -9,6 +9,12 @@ function CustCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil) {
         wc = "spid = 11";//sp.salesperson
         //wcParams = [parseInt($scope.sp.salesperson)];
         BSServiceUtil.queryResultWithCallback("SFSPRetailJPViewRef", "_NOCACHE_", wc, undefined, undefined, spRetailJPResult);
+        var spRetailResult = function(result) {
+            $scope.spRetailList = result;
+        }
+        wc = "spid = 11";//sp.salesperson
+        //wcParams = [parseInt($scope.sp.salesperson)];
+        BSServiceUtil.queryResultWithCallback("SFSPRetailViewRef", "_NOCACHE_", wc, undefined, undefined, spRetailResult);
 }
 angular
     .module('mymobile3')
