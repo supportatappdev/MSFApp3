@@ -8,7 +8,8 @@
         'ui.bootstrap',                 // Ui Bootstrap
         'ngResource',
          'cgNotify',
-          'oitozero.ngSweetAlert' 
+          'oitozero.ngSweetAlert',
+          'infinite-scroll'
     ])
 })();
 
