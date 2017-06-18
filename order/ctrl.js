@@ -3,12 +3,34 @@
  */
 function OrderCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil,$modal) {
         $("body").removeClass("mini-navbar");
-        $scope.orderListLoading = true;
-    var orderResult = function(result) {
-        $scope.orderListLoading = false;
-        $scope.orderList = result;
+     //   $scope.orderListLoading = true;
+        $scope.orders = {
+             orderList:[],
+             orderListLoading: false,
+             offset: 0,
+             limit: 20
+        };
+     var loadOrders = function() {
+         $scope.orders.orderListLoading = true;
+      var orderResult = function(result) {
+        $scope.orders.orderListLoading = false;
+            for(var k = 0; k < result.length; k++) {
+                    $scope.orders.orderList.push(result[k]);
+            }
+            if(result.length <  $scope.orders.limit) {
+                    $scope.orders.loaded = true;
+            }
     }
-    BSServiceUtil.queryResultWithCallback("SFOrdersViewRef", "_NOCACHE_", undefined, undefined, undefined, orderResult);
+      BSServiceUtil.queryResultWithCallback("SFOrdersViewRef", "_NOCACHE_", undefined, undefined, undefined, orderResult,$scope.orders.limit,$scope.orders.offset);
+     }
+     loadOrders();
+     $scope.getNextPage = function() {
+            if($scope.orders.loaded) {
+                return;
+            }
+            $scope.orders.offset = ($scope.orders.offset + $scope.orders.limit);
+            loadOrders();
+        }
 
     $scope.openLineItems = function(row) {
         $scope.inv = row;
@@ -21,7 +43,7 @@ function OrderCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil,$moda
     }
 }
 function lineItemCntrl($scope,BSServiceUtil,$modalInstance) {
-    $scope.loadDetData = false;
+    
     var invoiceItem = function(c,params) {
        $scope.loadDetData  = true;
         var invoiceListItemResult = function(result) {
