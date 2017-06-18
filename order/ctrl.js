@@ -3,7 +3,9 @@
  */
 function OrderCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil,$modal) {
         $("body").removeClass("mini-navbar");
+        $scope.orderListLoading = true;
     var orderResult = function(result) {
+        $scope.orderListLoading = false;
         $scope.orderList = result;
     }
     BSServiceUtil.queryResultWithCallback("SFOrdersViewRef", "_NOCACHE_", undefined, undefined, undefined, orderResult);
@@ -32,9 +34,10 @@ function lineItemCntrl($scope,BSServiceUtil,$modalInstance) {
     var wc = "order_no = ?";
     var wcParams = [$scope.inv.order_no];
     invoiceItem(wc,wcParams);
-//    $scope.docType = $scope.inv.party_name;//ACCOUNT_CODE;//$scope.dtype;//"Invoice";
-  //  $scope.docNo = $scope.inv.pi_no;//$scope.dno;//1234;
-//    $scope.docDt = $scope.inv.pi_date;//SO_DATE;
+      $scope.inv1 = $scope.inv;
+//    $scope.docType = $scope.inv.cust_name;//ACCOUNT_CODE;//$scope.dtype;//"Invoice";
+ //   $scope.docNo = $scope.inv.order_no;//$scope.dno;//1234;
+   // $scope.docDt = $scope.inv.cust_code;//SO_DATE;
     
     $scope.close = function(){
         $modalInstance.close();
