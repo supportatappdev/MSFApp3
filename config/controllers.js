@@ -3,7 +3,7 @@
  */
 angular
     .module('mymobile3')
-    .controller('MainCtrl', function MainCtrl($scope,Cache,$location,AlertService,$http) {
+    .controller('MainCtrl', function MainCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil) {
         $scope._appUrl = _appUrl;
 //var _appUrl = "http://ec2-54-80-147-67.compute-1.amazonaws.com:8180";//getBaseURL()+getAppName(window.location.pathname);
   $scope.pageTitle = "Journey Plan";
@@ -16,6 +16,15 @@ angular
         $location.path("/index/main");
     }
     
+    var initSalesRep = function() {
+        var callback = function(result) {
+                $scope.salesrep = result[0];
+            }
+            var wc = "user_id = ?";//sp.salesperson
+            var wcParams = [Cache.loggedInUser().uId];
+            BSServiceUtil.queryResultWithCallback("SFSalesPersonRef", "_NOCACHE_", wc, wcParams, undefined, callback);
+    }
+    initSalesRep();
      $scope.logout = function() {
          	$http.get(_appUrl+'/api/logout').
 	  success(function(data, status, headers, config) {
