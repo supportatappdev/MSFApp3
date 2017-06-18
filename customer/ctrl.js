@@ -3,20 +3,44 @@
  */
 function CustCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil) {
         $("body").removeClass("mini-navbar");
-        var spRetailJPResult = function(result) {
-            $scope.spRetailJPList = result;
+        $scope.retailers = {
+             spRetailList:[],
+             retailListLoading: false,
+             offset: 0,
+             limit: 20
+        };
+    //     $scope.retialers.retailListLoading = true;
+    //     var spRetailJPResult = function(result) {
+    //         $scope.retialers.spRetailJPList = result;
+    //     }
+    //     wc = "spid = 11";//sp.salesperson
+    //     //wcParams = [parseInt($scope.sp.salesperson)];
+    //     BSServiceUtil.queryResultWithCallback("SFSPRetailJPViewRef", "_NOCACHE_", wc, undefined, undefined, spRetailJPResult);
+    
+      
+        var loadReatils  = function() {
+              $scope.retailers.retailListLoading = true;
+            var spRetailResult = function(result) {
+                $scope.retailers.retailListLoading = false;
+                for(var k = 0; k < result.length; k++) {
+                    $scope.retailers.spRetailList.push(result[k]);
+                }
+                if(result.length <  $scope.retailers.limit) {
+                    $scope.retailers.loaded = true;
+                }
+            }
+            wc = "spid = 11";//sp.salesperson
+            //wcParams = [parseInt($scope.sp.salesperson)];
+            BSServiceUtil.queryResultWithCallback("SFSPRetailViewRef", "_NOCACHE_", wc, undefined, undefined, spRetailResult, $scope.retailers.limit,$scope.retailers.offset);
         }
-        wc = "spid = 11";//sp.salesperson
-        //wcParams = [parseInt($scope.sp.salesperson)];
-        BSServiceUtil.queryResultWithCallback("SFSPRetailJPViewRef", "_NOCACHE_", wc, undefined, undefined, spRetailJPResult);
-       $scope.retailListLoading = true;
-        var spRetailResult = function(result) {
-            $scope.retailListLoading = false;
-            $scope.spRetailList = result;
+        loadReatils();
+        $scope.getNextPage = function() {
+            if($scope.retailers.loaded) {
+                return;
+            }
+            $scope.retailers.offset = ($scope.retailers.offset + $scope.retailers.limit);
+            loadReatils();
         }
-        wc = "spid = 11";//sp.salesperson
-        //wcParams = [parseInt($scope.sp.salesperson)];
-        BSServiceUtil.queryResultWithCallback("SFSPRetailViewRef", "_NOCACHE_", wc, undefined, undefined, spRetailResult);
 }
 angular
     .module('mymobile3')
