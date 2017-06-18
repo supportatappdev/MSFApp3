@@ -9,15 +9,6 @@ function CustCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil) {
              offset: 0,
              limit: 20
         };
-    //     $scope.retialers.retailListLoading = true;
-    //     var spRetailJPResult = function(result) {
-    //         $scope.retialers.spRetailJPList = result;
-    //     }
-    //     wc = "spid = 11";//sp.salesperson
-    //     //wcParams = [parseInt($scope.sp.salesperson)];
-    //     BSServiceUtil.queryResultWithCallback("SFSPRetailJPViewRef", "_NOCACHE_", wc, undefined, undefined, spRetailJPResult);
-    
-      
         var loadReatils  = function() {
               $scope.retailers.retailListLoading = true;
             var spRetailResult = function(result) {
@@ -29,9 +20,9 @@ function CustCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil) {
                     $scope.retailers.loaded = true;
                 }
             }
-            wc = "spid = 11";//sp.salesperson
-            //wcParams = [parseInt($scope.sp.salesperson)];
-            BSServiceUtil.queryResultWithCallback("SFSPRetailViewRef", "_NOCACHE_", wc, undefined, undefined, spRetailResult, $scope.retailers.limit,$scope.retailers.offset);
+            var wc = "spid = ?";//sp.salesperson
+            var wcParams = [ $scope.salesrep.id];
+            BSServiceUtil.queryResultWithCallback("SFSPRetailViewRef", "_NOCACHE_", wc, wcParams, undefined, spRetailResult, $scope.retailers.limit,$scope.retailers.offset);
         }
         loadReatils();
         $scope.getNextPage = function() {
@@ -53,7 +44,7 @@ angular
         var _operation = 'INSERT';
         $scope.addCustomer = function() {
         $scope.addcspinner = true;
-          var inputJSON = {};
+        var inputJSON = {};
                 if(_operation !== 'UPDATE') {
                     inputJSON.uid = Cache.loggedInUser.userId;
                 } else {
