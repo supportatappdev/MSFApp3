@@ -42,8 +42,8 @@
                         </form>
                     </div>
                     <div class="hr-line-dashed"></div>
-                    <div class="text-center"><i class="fa fa-spin fa-spinner fa-2x" ng-show="orderListLoading"></i></div>
-                    <div ng-repeat='o in orderList | filter:search'>
+                       <div infinite-scroll='getNextPage()' infinite-scroll-disabled='orders.retailListLoading' infinite-scroll-distance='2'>
+                        <div ng-repeat='o in orders.orderList | filter:search'>
                     <div class="search-result">
                      <!--<a ng-click="openLineItems(o)">-->
                      <!--   <strong>Order No: {{o.order_no}} </strong>-->
@@ -65,6 +65,8 @@
                     </div>
                     <div class="hr-line-dashed"></div>
                    </div>
+                        <div class="text-center"><i class="fa fa-spin fa-spinner fa-2x" ng-show="orderListLoading"></i></div>
+                      </div>
                     <!--<div class="text-center" ng-hide="retailListLoading">-->
                     <!--    <div class="btn-group">-->
                     <!--        <button class="btn btn-white" type="button"><i class="fa fa-chevron-left"></i></button>-->
