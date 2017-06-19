@@ -291,6 +291,13 @@ mymobile3.service('AlertService', function(SweetAlert,notify) {
         SweetAlert.swal({
             title: errTitle,
             text: errMessage,
+            type: "error"
+        });
+    }
+    this.showWarning = function(errTitle, errMessage) {
+        SweetAlert.swal({
+            title: errTitle,
+            text: errMessage,
             type: "warning"
         });
     }
