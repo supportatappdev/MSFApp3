@@ -72,10 +72,46 @@ angular
         }
         $scope.startCall = function() {
             var callback = function() {
-                AlertService.showInfo("Testing");
+                $location.path("/index/newcall");
             }
             AlertService.showConfirm("Warning","Your day haven't started yet. Do you wish to start yoru day?",callback);
         }
+});
+angular
+    .module('mymobile3')
+    .controller('NewCallCtrl', function CustCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil,$location) {
+       $scope._currDate = new Date();
+        $("body").removeClass("mini-navbar");
+        $scope.retailers = {
+             spRetailList:[],
+             retailListLoading: false,
+             offset: 0,
+             limit: 20
+        };
+        var loadReatils  = function() {
+              $scope.retailers.retailListLoading = true;
+            var spRetailResult = function(result) {
+                $scope.retailers.retailListLoading = false;
+                for(var k = 0; k < result.length; k++) {
+                    $scope.retailers.spRetailList.push(result[k]);
+                }
+                if(result.length <  $scope.retailers.limit) {
+                    $scope.retailers.loaded = true;
+                }
+            }
+            var wc = "spid = ?";//sp.salesperson
+            var wcParams = [ $scope.salesrep.id];
+            BSServiceUtil.queryResultWithCallback("SFSPRetailJPViewRef", "_NOCACHE_", wc, wcParams, undefined, spRetailResult, $scope.retailers.limit,$scope.retailers.offset);
+        }
+        loadReatils();
+        $scope.getNextPage = function() {
+            if($scope.retailers.loaded) {
+                return;
+            }
+            $scope.retailers.offset = ($scope.retailers.offset + $scope.retailers.limit);
+            loadReatils();
+        }
+        
 });
 
 angular
