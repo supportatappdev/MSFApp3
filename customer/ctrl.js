@@ -71,7 +71,7 @@ angular
             loadReatils();
         }
         $scope.startCall = function() {
-            AlertService.showInfo("Your day haven't started yet. Do you wish to start yoru day?");
+            AlertService.showWarning("Warning","Your day haven't started yet. Do you wish to start yoru day?");
         }
 });
 
@@ -106,7 +106,7 @@ angular
                     if(_operation == 'UPDATE') {
                         _op = "Updated";
                     }
-                    AlertService.showInfo("Added retailer ["+$scope.cust.cust_name+"]  successfully");
+                    AlertService.showInfo("Warning","Added retailer ["+$scope.cust.cust_name+"]  successfully");
                     $scope.gotoCustomers();
                 }
                 $scope.addcspinner  =false;
