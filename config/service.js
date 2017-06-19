@@ -294,6 +294,24 @@ mymobile3.service('AlertService', function(SweetAlert,notify) {
             type: "error"
         });
     }
+    this.showConfirm = function(errTitle, errMessage,callback) {
+        SweetAlert.swal({
+              title:errTitle,
+              text: errMessage,
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              cancelButtonText: "No",
+              confirmButtonText: "Yes",
+              closeOnConfirm: false,
+              closeOnCancel: true
+            },
+            function(isConfirm){
+              if (isConfirm) {
+                  callback();
+              }
+        });
+    }
     this.showWarning = function(errTitle, errMessage) {
         SweetAlert.swal({
             title: errTitle,
