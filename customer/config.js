@@ -16,6 +16,11 @@ function custconfig($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
             templateUrl: "customer/jpretailers.html",
             data: { pageTitle: 'Today Journey' }
         })
+        .state('index.newcall', {
+            url: "/newcall",
+            templateUrl: "customer/newcall.html",
+            data: { pageTitle: 'New Order' }
+        })
 }
 angular
     .module('mymobile3')
