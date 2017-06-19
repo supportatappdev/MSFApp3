@@ -303,7 +303,7 @@ mymobile3.service('AlertService', function(SweetAlert,notify) {
               confirmButtonColor: "#DD6B55",
               cancelButtonText: "No",
               confirmButtonText: "Yes",
-              closeOnConfirm: false,
+              closeOnConfirm: true,
               closeOnCancel: true
             },
             function(isConfirm){
