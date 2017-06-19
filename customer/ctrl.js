@@ -71,7 +71,10 @@ angular
             loadReatils();
         }
         $scope.startCall = function() {
-            AlertService.showWarning("Warning","Your day haven't started yet. Do you wish to start yoru day?");
+            var callback = function() {
+                AlertService.showInfo("Testing");
+            }
+            AlertService.showConfirm("Warning","Your day haven't started yet. Do you wish to start yoru day?",callback);
         }
 });
 
