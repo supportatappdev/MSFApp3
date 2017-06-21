@@ -6,33 +6,36 @@
         
         <div >
             <div class="ibox float-e-margins">
-                <div class="ibox-content">
+                <div >
                     <form class="form-horizontal">
 <table class="table  table-bordered">
                                 <thead>
                                     <tr>
                                         <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /></th>
-                                        <th>Product Name</th>
-                                         <th >Price</th>
-                                        <th >Quantity</th>
+                                        <th>Product</th>
                                          <th >Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat='po in order'>
-                                        <td>
+                                        <td class="col-lg-4">
                                             <input type="checkbox" ng-model="po.selected"/></td>
                                         <td>
-                                        <select class="form-control" ng-model="selproduct"  ng-change="setProdDetails(selproduct,po)"
+                                        <div>
+                                         <select class="form-control" ng-model="selproduct"  ng-change="setProdDetails(selproduct,po)"
                                             ng-options="p as p.prd_name for p in products">
-                                            </select>        
-                                                
-                                                
+                                            </select> 
+                                         </div>
+                                         <div>
+                                         Price:    
+                                         <input type="text" class="form-control" ng-model="po.price" disabled/>
+                                        </div>    
+                                         <div>
+                                             Qty:
+                                          <input type="text" class="form-control" ng-model="po.quantity" required ng-change="setTotal(po)"/>         
+                                         </div>       
                                             </td>
-                                        <td>
-                                            <input type="text" class="form-control" ng-model="po.price" disabled/></td>
-                                        <td>
-                                            <input type="text" class="form-control" ng-model="po.quantity" required ng-change="setTotal(po)"/></td>
+                                       
                                             <td>
                                             <input type="text" class="form-control" ng-model="po.total" ng-value="po.price*po.quantity" disabled/></td>
                                              
