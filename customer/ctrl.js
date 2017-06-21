@@ -79,8 +79,15 @@ angular
 });
 angular
     .module('mymobile3')
-    .controller('NewCallCtrl', function CustCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil,$location) {
+    .controller('NewCallCtrl', function CustCtrl($filter,$scope,Cache,$location,AlertService,$http,BSServiceUtil,$location) {
        $scope._currDate = new Date();
+       var loadProducts = function() {
+            var products = function(result) {
+                    $scope.products = result;
+            }
+            BSServiceUtil.queryResultWithCallback("SFProductRef", "_NOCACHE_", undefined, undefined, undefined, products);
+       }
+       loadProducts();
         $("body").removeClass("mini-navbar");
         $scope.retailers = {
              spRetailList:[],
@@ -104,6 +111,15 @@ angular
             BSServiceUtil.queryResultWithCallback("SFSPRetailJPViewRef", "_NOCACHE_", wc, wcParams, undefined, spRetailResult, $scope.retailers.limit,$scope.retailers.offset);
         }
         loadReatils();
+         $scope.setProdDetails = function(selproduct,po) {
+                po.price = selproduct.ctnr_price;
+                po.prodname = selproduct.prd_name;
+            }
+            
+        $scope.setTotal = function(po) {
+                po.total = $filter('number')(po.price*po.quantity,2);
+            }    
+     
         $scope.getNextPage = function() {
             if($scope.retailers.loaded) {
                 return;
@@ -111,6 +127,32 @@ angular
             $scope.retailers.offset = ($scope.retailers.offset + $scope.retailers.limit);
             loadReatils();
         }
+        $scope.order = [];
+        $scope.addNew = function($event){
+            $event.preventDefault();
+            $scope.order.push( {selected:false,prodname:'',quantity:'',price:'',grams:'',no_of_packs:'',loadability:''});
+        };
+        $scope.remove = function(){
+                var newDataList=[];
+                $scope.selectedAll = false;
+                angular.forEach($scope.order, function(selected){
+                    if(!selected.selected){
+                        newDataList.push(selected);
+                    }
+                }); 
+                $scope.order = newDataList;
+            };
+        $scope.selectedAll  = false;
+        $scope.checkAll = function () {
+            if (!$scope.selectedAll) {
+                $scope.selectedAll = true;
+            } else {
+                $scope.selectedAll = false;
+            }
+            angular.forEach($scope.order, function(mps) {
+                mps.selected = $scope.selectedAll;
+            });
+        };   
         
 });
 
@@ -140,7 +182,7 @@ angular
             }, params, function(result) {
                 if (result.status === "E") {
                     AlertService.showError("Validation Error",result.errorMsg);
-                }  else {
+                }  else {a
                     var _op = "Added";
                     if(_operation == 'UPDATE') {
                         _op = "Updated";
