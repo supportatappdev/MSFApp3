@@ -25,4 +25,3 @@ function getAppName(p) {
 }
 var _appUrl = "http://ec2-54-80-147-67.compute-1.amazonaws.com:8180";//getBaseURL()+getAppName(window.location.pathname);
 
-alert("Getting here:"+_appUrl);
