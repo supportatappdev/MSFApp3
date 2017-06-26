@@ -4,22 +4,18 @@
 angular
     .module('mymobile3')
     .controller('MainCtrl', function MainCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil) {
-    alert("Getting here: 1"+_appUrl);
     $scope._appUrl = _appUrl;
     $scope.pageTitle = "Journey Plan";
     $scope.params = {};
-      alert("Getting here: 2"+_appUrl);
     if(!Cache.loggedInUser()) {  
        $scope.showLogin = true;
        return;
     } else {
       $scope.user = Cache.loggedInUser()
-      alert("Getting here: 22"+$scope.user.uId);
         console.log(Cache.loggedInUser());
         $scope.showLogin = false;
         $location.path("/index/main");
     }
-      alert("Getting here: 3"+_appUrl);
     var initSalesRep = function() {
         var callback = function(result) {
                 $scope.salesrep = result[0];
@@ -29,7 +25,6 @@ angular
             var wcParams = [Cache.loggedInUser().uId];
             BSServiceUtil.queryResultWithCallback("SFSalesPersonRef", "_NOCACHE_", wc, wcParams, undefined, callback);
     }
-     alert("Getting here: 4"+$scope.user.uId);
     initSalesRep();
     $scope.logout = function() {
          	$http.get(_appUrl+'/api/logout').
@@ -52,7 +47,8 @@ angular
                 un: $scope.username,
                 pw: $scope.pwd
             });
-        
+             alert("In login"+data);
+
             var config = {
                 headers : {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
