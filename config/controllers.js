@@ -4,9 +4,10 @@
 angular
     .module('mymobile3')
     .controller('MainCtrl', function MainCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil) {
-        $scope._appUrl = _appUrl;
-//var _appUrl = "http://ec2-54-80-147-67.compute-1.amazonaws.com:8180";//getBaseURL()+getAppName(window.location.pathname);
-  $scope.pageTitle = "Journey Plan";
+    
+    $scope._appUrl = _appUrl;
+    $scope.pageTitle = "Journey Plan";
+    $scope.params = {};
     if(!Cache.loggedInUser()) {  
        $scope.showLogin = true;
     } else {
@@ -15,7 +16,6 @@ angular
         $scope.showLogin = false;
         $location.path("/index/main");
     }
-    
     var initSalesRep = function() {
         var callback = function(result) {
                 $scope.salesrep = result[0];
@@ -25,7 +25,7 @@ angular
             BSServiceUtil.queryResultWithCallback("SFSalesPersonRef", "_NOCACHE_", wc, wcParams, undefined, callback);
     }
     initSalesRep();
-     $scope.logout = function() {
+    $scope.logout = function() {
          	$http.get(_appUrl+'/api/logout').
 	  success(function(data, status, headers, config) {
 		  localStorage.clear();
@@ -40,7 +40,7 @@ angular
 		  $location.path(getAppName(window.location.pathname));
 	  });
      }
-     $scope.login  = function() {
+    $scope.login  = function() {
             $scope.signin  = true;
             var data = $.param({
                 un: $scope.username,
@@ -71,8 +71,5 @@ angular
                     "</li><li>config: " + config +"</li>";
             });
         }
-    
-    this.userName = 'Example user';
-    this.helloText = 'Welcome in SeedProject';
-    this.descriptionText = 'It is an application skeleton for a typical AngularJS web app. You can use it to quickly bootstrap your angular webapp projects and dev environment for these projects.';
+       
 })
