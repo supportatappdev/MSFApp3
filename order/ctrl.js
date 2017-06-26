@@ -22,7 +22,7 @@ function OrderCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil,$moda
         }
         var wc = "spid = ?";
         var params = [ $scope.salesrep.id];
-      BSServiceUtil.queryResultWithCallback("SFOrdersViewRef", "_NOCACHE_", wc, params, undefined, orderResult,$scope.orders.limit,$scope.orders.offset);
+      BSServiceUtil.queryResultWithCallback("SFOrdersViewRef", "_NOCACHE_", wc, params, " creation_date desc ", orderResult,$scope.orders.limit,$scope.orders.offset);
      }
      loadOrders();
      $scope.getNextPage = function() {
