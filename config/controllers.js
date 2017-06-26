@@ -13,6 +13,7 @@ angular
        $scope.showLogin = true;
     } else {
       $scope.user = Cache.loggedInUser()
+      alert("Getting here: 22"+$scope.user.uId);
         console.log(Cache.loggedInUser());
         $scope.showLogin = false;
         $location.path("/index/main");
@@ -21,11 +22,13 @@ angular
     var initSalesRep = function() {
         var callback = function(result) {
                 $scope.salesrep = result[0];
+                alert($scope.salesrep );
             }
             var wc = "user_id = ?";//sp.salesperson
             var wcParams = [Cache.loggedInUser().uId];
             BSServiceUtil.queryResultWithCallback("SFSalesPersonRef", "_NOCACHE_", wc, wcParams, undefined, callback);
     }
+     alert("Getting here: 4"+$scope.user.uId);
     initSalesRep();
     $scope.logout = function() {
          	$http.get(_appUrl+'/api/logout').
