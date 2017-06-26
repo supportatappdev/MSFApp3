@@ -3,7 +3,6 @@
 
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller='AddCustCtrl'>
     <div class="row">
-        
         <div >
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
@@ -20,8 +19,13 @@
                             </div>
                         </div>
                         <div class="form-group"><label class="col-lg-2 control-label">Address1</label>
-                            <div class="col-lg-10">
+                            <div class="col-lg-8">
                             <textarea  placeholder="Address1" class="form-control" ng-model="cust.addr_line1"></textarea>
+                            </div>
+                            <div class="col-lg-2">
+                            <button class="btn btn-primary" class="form-control" ng-click="getLatitudeLongitude()">
+                            <i class="fa fa-map-maker" ng-show="!getlatlong"></i>
+                            <i class="fa fa-spinner fa-spin" ng-show="getlatlong"></i> Get Location</button>
                             </div>
                         </div>
                          <div class="form-group"><label class="col-lg-2 control-label">Address2</label>
@@ -61,15 +65,30 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <button class="btn btn-sm btn-primary" ng-click="addCustomer()"><i class="fa fa-plus"></i> Add Customer</button>
+                                <button class="btn btn-sm btn-primary" ng-click="addCustomer()"><i class="fa fa-plus"></i> {{btnTxt}}</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-    
+        <div>
+             <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <i class="fa fa-map-marker"></i> Retailer Location
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal">
+                      <ng-map center="17.385044, 78.486671" zoom="4"
+                           pan-control="true"
+                           map-type-control="true"
+                           map-type-control-options="{style:'DROPDOWN_MENU'}"
+                           zoom-control="true"
+                           zoom-control-options="{style:'SMALL'}">
+                      </ng-map>
+                    </form>
+                </div>
+            </div>    
         </div>
     </div>
 </div>
