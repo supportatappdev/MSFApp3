@@ -4,10 +4,11 @@
 angular
     .module('mymobile3')
     .controller('MainCtrl', function MainCtrl($scope,Cache,$location,AlertService,$http,BSServiceUtil) {
-    
+    alert("Getting here: 1"+_appUrl);
     $scope._appUrl = _appUrl;
     $scope.pageTitle = "Journey Plan";
     $scope.params = {};
+      alert("Getting here: 2"+_appUrl);
     if(!Cache.loggedInUser()) {  
        $scope.showLogin = true;
     } else {
@@ -16,6 +17,7 @@ angular
         $scope.showLogin = false;
         $location.path("/index/main");
     }
+      alert("Getting here: 3"+_appUrl);
     var initSalesRep = function() {
         var callback = function(result) {
                 $scope.salesrep = result[0];
