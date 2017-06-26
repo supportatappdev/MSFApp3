@@ -45,7 +45,7 @@
                     <div class="hr-line-dashed"></div>
                    <div infinite-scroll='getNextPage()' infinite-scroll-disabled='retailers.retailListLoading' infinite-scroll-distance='2'>
                       <div ng-repeat='cts in retailers.spRetailList | filter:search'>
-                    <div class="search-result" ng-click="startCall()">
+                    <div class="search-result" ng-click="startCall(cts.cid)">
                         <h3><a href="">{{cts.cust_name}}</a></h3>
                         <a  class="search-link">[{{cts.cust_code}}]</a>
                         <p>
