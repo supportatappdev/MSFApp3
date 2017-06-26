@@ -12,6 +12,9 @@ angular
              offset: 0,
              limit: 20
         };
+        $scope.goToRetailer = function(custid) {
+            $location.path("/index/addcust/"+custid);
+        }
         var loadReatils  = function() {
               $scope.retailers.retailListLoading = true;
             var spRetailResult = function(result) {
@@ -70,17 +73,22 @@ angular
             $scope.retailers.offset = ($scope.retailers.offset + $scope.retailers.limit);
             loadReatils();
         }
-        $scope.startCall = function() {
+        $scope.startCall = function(id) {
             var callback = function() {
-                $location.path("/index/newcall");
+                $location.path("/index/newcall/"+id);
             }
-            AlertService.showConfirm("Warning","Your day haven't started yet. Do you wish to start yoru day?",callback);
+            if(!$scope.params.isStrartDay) {
+                AlertService.showConfirm("Warning","Your day haven't started yet. Do you wish to start yoru day?",callback);
+            } else {
+                callback();
+            }
         }
 });
 angular
     .module('mymobile3')
-    .controller('NewCallCtrl', function CustCtrl($filter,$scope,Cache,$location,AlertService,$http,BSServiceUtil,$location) {
+    .controller('NewCallCtrl', function CustCtrl(BSService,Util,$state,$stateParams,$filter,$scope,Cache,$location,AlertService,$http,BSServiceUtil,$location) {
        $scope._currDate = new Date();
+       $scope.params.isStrartDay = true;
        var loadProducts = function() {
             var products = function(result) {
                     $scope.products = result;
@@ -88,6 +96,107 @@ angular
             BSServiceUtil.queryResultWithCallback("SFProductRef", "_NOCACHE_", undefined, undefined, undefined, products);
        }
        loadProducts();
+       var startCall = function() {
+            var inputJSON = {};
+                inputJSON.customer_id = $stateParams.id;
+                inputJSON.executive_id = $scope.salesrep.id;
+                inputJSON.call_start_time = Util.convertDBDate(new Date());
+                 inputJSON.isGenIds = "Y";
+                 var params = {
+                'ds': 'FISfCustomerVisitRef',
+                'operation': 'INSERT',
+                'data': inputJSON
+            };
+            BSService.save({
+                'method': 'update'
+            }, params, function(result) {
+                if (result.status === "E") {
+                    AlertService.showError("Validation Error",result.errorMsg);
+                }  else {
+                    $scope.callid = result.ids[0];
+                }
+            });
+        }
+       startCall();
+       $scope.submitOrder = function() {
+           var inputJSON = {};
+                inputJSON.customer_id = $stateParams.id;
+                inputJSON.order_no = "SO-05062017-"+$scope.callid;
+                inputJSON.order_amount = $scope.totalAmountNumber;
+                inputJSON.item_count = $scope.products.length;
+                inputJSON.order_tax_amount = 0;
+                 inputJSON.isGenIds = "Y";
+                 var params = {
+                'ds': 'FISFOrderRef',
+                'operation': 'INSERT',
+                'data': inputJSON
+            };
+            BSService.save({
+                'method': 'update'
+            }, params, function(result) {
+                if (result.status === "E") {
+                    AlertService.showError("Validation Error",result.errorMsg);
+                }  else {
+                    var orderId = result.ids[0];
+                    submitOrderDetails(orderId,inputJSON.order_no);
+                   // endCall(orderId);
+                }
+            });
+       }
+       var submitOrderDetails = function(orderId,orderNo) {
+		  var params = [];
+		   for(var k = 0; k < $scope.order.length; k++) {
+		       var inputJSON = {};
+		       inputJSON.customer_id = $stateParams.id;
+                inputJSON.order_no = orderNo;
+                 inputJSON.order_id = orderId;
+                inputJSON.product_id = $scope.order[k].id;
+                inputJSON.item_qty = $scope.order[k].quantity;
+                 inputJSON.item_amount = $scope.order[k].price;
+                 inputJSON.item_scheme_amount = 0;
+                 var _item = {
+                'ds': 'SFOrderDetRef',
+                'operation': 'INSERT',
+                'data': inputJSON
+                };
+                params.push(_item);
+		   }
+                
+            BSService.save({
+                'method': 'update'
+            }, {"list":params} , function(result) {
+                if (result.status === "E") {
+                    AlertService.showError("Validation Error",result.errorMsg);
+                }  else {
+                    endCall();
+                }
+            });            
+       }
+       
+       var endCall  = function(orderId) {
+           var inputJSON = {};
+                inputJSON.id = $scope.callid;
+                inputJSON.call_end_time = Util.convertDBDate(new Date());
+                inputJSON.order_id = orderId;
+                inputJSON.custUpdate = "Y";
+                 var params = {
+                'ds': 'FISfCustomerVisitRef',
+                'operation': 'UPDATE',
+                'data': inputJSON
+            };
+            BSService.save({
+                'method': 'update'
+            }, params, function(result) {
+                if (result.status === "E") {
+                    AlertService.showError("Validation Error",result.errorMsg);
+                }  else {
+                    gotoJPCustomers();
+                }
+            });
+       }
+       var gotoJPCustomers = function() {
+           $location.path("/index/listcustjp")
+       }
         $("body").removeClass("mini-navbar");
         $scope.retailers = {
              spRetailList:[],
@@ -114,10 +223,17 @@ angular
          $scope.setProdDetails = function(selproduct,po) {
                 po.price = selproduct.ctnr_price;
                 po.prodname = selproduct.prd_name;
+                po.id = selproduct.id;
             }
             
         $scope.setTotal = function(po) {
                 po.total = $filter('number')(po.price*po.quantity,2);
+                var _totAmount = 0;
+                angular.forEach($scope.order, function(po){
+                    _totAmount += po.price*po.quantity ;
+                }); 
+                $scope.totalAmount = $filter('number')(_totAmount,2);
+                $scope.totalAmountNumber = _totAmount;
             }    
      
         $scope.getNextPage = function() {
@@ -128,6 +244,8 @@ angular
             loadReatils();
         }
         $scope.order = [];
+        $scope.totalAmount = 0;
+        $scope.totalAmountNumber = 0;
         $scope.addNew = function($event){
             $event.preventDefault();
             $scope.order.push( {selected:false,prodname:'',quantity:'',price:'',grams:'',no_of_packs:'',loadability:''});
@@ -158,20 +276,72 @@ angular
 
 angular
     .module('mymobile3')
-    .controller('AddCustCtrl', function AddCustCtrl($scope,Cache,$location,AlertService,$http,BSService) {
+    .controller('AddCustCtrl', function AddCustCtrl(Util,BSServiceUtil,$state,$stateParams,$scope,Cache,$location,AlertService,$http,BSService) {
         $("body").removeClass("mini-navbar");
         var _operation = 'INSERT';
+        var _custId = $stateParams.id;
+        $scope.getLatitudeLongitude = function() {
+            $scope.getlatlong = true;
+            var callback = function(lat,long) {
+                $scope.$apply(function () {
+                    $scope.cust.latitude = lat;
+                    $scope.cust.longitude = long;
+                    $scope.getlatlong = false;
+                });
+            }
+            getLatLong(callback);
+        }
+        var getLatLong = function(callback) {
+            // If adress is not supplied, use default value 'Ferrol, Galicia, Spain'
+            if(!$scope.cust.addr_line1) {
+                AlertService.showError("Validation Error","Please enter address");
+                return;
+            }
+            var _address = $scope.cust.addr_line1;
+            _address = angular.lowercase(_address);
+            if(_address.indexOf("hno") > -1 
+            || _address.indexOf("hno:") > -1) {
+                _address = _address.replace(/hno:/g, '');
+                _address = _address.replace(/hno/g, '');
+            }
+            // Initialize the Geocoder
+            geocoder = new google.maps.Geocoder();
+            if (geocoder) {
+                geocoder.geocode({
+                    'address': _address
+                }, function (result, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        callback(result[0].geometry.location.lat(),result[0].geometry.location.lng());
+                    } else {
+                        AlertService.showError("Validation Error","Not able to find locations, Please enter valid address");
+                    }
+                });
+            }
+        }
+        var getCustomer = function() {
+            var callback = function(result) {
+                $scope.cust = result[0];
+            }
+            var wc = "id = ?";//sp.salesperson
+            var wcParams = [ _custId];
+            BSServiceUtil.queryResultWithCallback("FISFCustomerRef", "_NOCACHE_", wc, wcParams, undefined, callback);
+        }
+        if(_custId !== 'new') {
+            _operation = 'UPDATE';
+             getCustomer();
+             $scope.btnTxt = "Update Customer";
+        } else {
+            $scope.btnTxt = "Add Customer";
+        }
         $scope.addCustomer = function() {
         $scope.addcspinner = true;
-        var inputJSON = {};
-                if(_operation !== 'UPDATE') {
-                    inputJSON.uid = Cache.loggedInUser.userId;
+        var inputJSON = $scope.cust;
+                if(_operation == 'UPDATE')  {
+                    inputJSON.last_update_date = Util.convertDBDate(new Date());
+                    inputJSON.creation_date = Util.convertDBDate($scope.cust.creation_date);
                 } else {
-                    inputJSON.CREATION_DATE = Util.convertDBDate(inputJSON.CREATION_DATE);
-                    inputJSON.LAST_UPDATE_DATE = Util.convertDBDate(new Date());
+                 inputJSON.cust_code = 'W00'+$scope.cust.cust_name;
                 }
-                inputJSON = $scope.cust;
-                inputJSON.cust_code = 'W00'+$scope.cust.cust_name;
                  var params = {
                 'ds': 'FISFCustomerRef',
                 'operation': _operation,
@@ -182,12 +352,12 @@ angular
             }, params, function(result) {
                 if (result.status === "E") {
                     AlertService.showError("Validation Error",result.errorMsg);
-                }  else {a
+                }  else {
                     var _op = "Added";
                     if(_operation == 'UPDATE') {
                         _op = "Updated";
                     }
-                    AlertService.showInfo("Warning","Added retailer ["+$scope.cust.cust_name+"]  successfully");
+                    AlertService.showInfo("Warning",_op+" retailer ["+$scope.cust.cust_name+"]  successfully");
                     $scope.gotoCustomers();
                 }
                 $scope.addcspinner  =false;
