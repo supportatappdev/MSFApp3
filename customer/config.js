@@ -2,9 +2,21 @@ function custconfig($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
     $stateProvider
         .state('index.addcust', {
-            url: "/addcust",
+            url: "/addcust/:id",
             templateUrl: "customer/add.html",
             data: { pageTitle: 'Add Retailer' }
+            // ,
+            // resolve: {
+            //     loadPlugin: function ($ocLazyLoad) {
+            //         return $ocLazyLoad.load([
+            //             {
+            //                 serie: true,
+            //                 name: 'mapfinder',
+            //                 files: [ 'https://maps.googleapis.com/maps/api/js?sensor=false' ]
+            //             }
+            //              ]);
+            //     }
+            // }
         })
         .state('index.listcust', {
             url: "/listcust",
@@ -17,7 +29,7 @@ function custconfig($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
             data: { pageTitle: 'Today Journey' }
         })
         .state('index.newcall', {
-            url: "/newcall",
+            url: "/newcall/:id",
             templateUrl: "customer/newcall.html",
             data: { pageTitle: 'New Order' }
         })
