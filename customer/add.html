@@ -79,12 +79,8 @@
                 </div>
                 <div class="ibox-content">
                     <form class="form-horizontal">
-                      <ng-map center="17.385044, 78.486671" zoom="4"
-                           pan-control="true"
-                           map-type-control="true"
-                           map-type-control-options="{style:'DROPDOWN_MENU'}"
-                           zoom-control="true"
-                           zoom-control-options="{style:'SMALL'}">
+                      <ng-map center="{{cust.latitude}}, {{cust.longitude}}"  zoom="14" >
+                      <marker position="[{{cust.latitude}}, {{cust.longitude}}]" title="{{cust.addr_line1}}"></marker>
                       </ng-map>
                     </form>
                 </div>
