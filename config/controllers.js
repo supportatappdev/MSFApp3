@@ -11,6 +11,7 @@ angular
       alert("Getting here: 2"+_appUrl);
     if(!Cache.loggedInUser()) {  
        $scope.showLogin = true;
+       return;
     } else {
       $scope.user = Cache.loggedInUser()
       alert("Getting here: 22"+$scope.user.uId);
