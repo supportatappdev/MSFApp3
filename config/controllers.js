@@ -10,7 +10,6 @@ angular
      var initSalesRep = function() {
         var callback = function(result) {
                 $scope.salesrep = result[0];
-                alert($scope.salesrep );
             }
             var wc = "user_id = ?";//sp.salesperson
             var wcParams = [Cache.loggedInUser().uId];
@@ -37,8 +36,6 @@ angular
                 un: $scope.username,
                 pw: $scope.pwd
             });
-             alert("In login"+data);
-
             var config = {
                 headers : {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -68,7 +65,6 @@ angular
        return;
     } else {
       $scope.user = Cache.loggedInUser()
-        console.log(Cache.loggedInUser());
         $scope.showLogin = false;
         $location.path("/index/main");
     }
