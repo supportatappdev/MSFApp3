@@ -9,7 +9,8 @@
         'ngResource',
          'cgNotify',
           'oitozero.ngSweetAlert',
-          'infinite-scroll'
+          'infinite-scroll',
+          'ngMap'
     ])
 })();
 
