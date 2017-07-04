@@ -394,17 +394,23 @@ mymobile3.service('AppService', function(notify, BSServiceUtil, AlertService, Ca
     }
 });
 mymobile3.service('GeoLocation', function(AlertService,$rootScope) {
-    this.getLocation = function() {
+    this.getLocation2 = function() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         AlertService.showError("App Error", "Geolocation is not supported by this device.");
     }
 }
-function showPosition(position) {
-    $rootScope.lat =  position.coords.latitude;
-    $rootScope.long = position.coords.longitude; 
-}
+    this.getLocation = function() {
+         navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    }
+    function onSuccuess(position) {
+        $rootScope.lat =  position.coords.latitude;
+        $rootScope.long = position.coords.longitude; 
+    }
+    function onError(error) {
+        AlertService.showError("App Error", error.message);
+    }
 });
 
 mymobile3.service('Cache', function() {
