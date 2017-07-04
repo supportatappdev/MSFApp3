@@ -276,7 +276,7 @@ angular
 
 angular
     .module('mymobile3')
-    .controller('AddCustCtrl', function AddCustCtrl(Util,BSServiceUtil,$state,$stateParams,$scope,Cache,$location,AlertService,$http,BSService) {
+    .controller('AddCustCtrl', function AddCustCtrl(GeoLocation,Util,BSServiceUtil,$state,$stateParams,$scope,Cache,$location,AlertService,$http,BSService) {
         $("body").removeClass("mini-navbar");
         var _operation = 'INSERT';
         var _custId = $stateParams.id;
@@ -284,12 +284,17 @@ angular
             $scope.getlatlong = true;
             var callback = function(lat,long) {
                 $scope.$apply(function () {
-                    $scope.cust.latitude = lat;
-                    $scope.cust.longitude = long;
+                    // $scope.cust.latitude = lat;
+                    // $scope.cust.longitude = long;
+                    $scope.cust.latitude = $rootScope.lat;
+                    $scope.cust.longitude = $rootScope.long;
                     $scope.getlatlong = false;
                 });
             }
-            getLatLong(callback);
+            getLatLong2(callback);
+        }
+        var getLatLong2 = function() {
+            GeoLocation.getLocation();
         }
         var getLatLong = function(callback) {
             // If adress is not supplied, use default value 'Ferrol, Galicia, Spain'
