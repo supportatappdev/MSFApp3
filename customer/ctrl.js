@@ -282,20 +282,38 @@ angular
         var _custId = $stateParams.id;
         $scope.getLatitudeLongitude = function() {
             $scope.getlatlong = true;
-            var callback = function(lat,long) {
-                $scope.$apply(function () {
-                    // $scope.cust.latitude = lat;
-                    // $scope.cust.longitude = long;
-                    $scope.cust.latitude = $rootScope.lat;
-                    $scope.cust.longitude = $rootScope.long;
-                    $scope.getlatlong = false;
-                });
-            }
-            getLatLong2(callback);
+            // var callback = function(lat,long) {
+            //     $scope.$apply(function () {
+            //         // $scope.cust.latitude = lat;
+            //         // $scope.cust.longitude = long;
+            //         $scope.cust.latitude = $rootScope.lat;
+            //         $scope.cust.longitude = $rootScope.long;
+            //         $scope.getlatlong = false;
+            //     });
+            // }
+            getLatLong2();
         }
         var getLatLong2 = function() {
-            GeoLocation.getLocation();
+            getLocation();
         }
+        
+        var getLocation = function() {
+             navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        }
+        function onSuccess(position) {
+            AlertService.showError("langlat", position.coords.latitude+":"+position.coords.longitude);
+            $scope.$apply(function () {
+                    // $scope.cust.latitude = lat;
+                    // $scope.cust.longitude = long;
+                    $scope.cust.latitude = position.coords.latitude;
+                    $scope.cust.longitude = position.coords.longitude;
+                    $scope.getlatlong = false;
+                });
+        }
+        function onError(error) {
+         AlertService.showError("App Error", error.message);
+        }
+        
         var getLatLong = function(callback) {
             // If adress is not supplied, use default value 'Ferrol, Galicia, Spain'
             if(!$scope.cust.addr_line1) {
