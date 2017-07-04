@@ -22,5 +22,5 @@ function getBaseURL() {
 function getAppName(p) {
    return "/";
 }
-var _appUrl = "http://ec2-54-80-147-67.compute-1.amazonaws.com:8180";//getBaseURL()+getAppName(window.location.pathname);
+var _appUrl = "http://ec2-54-145-121-147.compute-1.amazonaws.com:8180";//getBaseURL()+getAppName(window.location.pathname);
 
