@@ -52,6 +52,12 @@
 <!-- Main view  -->
 <div ng-show="!showLogin" ui-view></div>
 <link href="build/css/app.css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8">
+    // Wait for device API libraries to load
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+    }
+</script>
 <script src="build/js/vendor1.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq0Rkd-lMffA4pHEhKxV5AHYMxj4eBXqk"></script>
 <script src="build/js/vendor2.js"></script>
