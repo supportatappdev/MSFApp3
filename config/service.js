@@ -404,7 +404,7 @@ mymobile3.service('GeoLocation', function(AlertService,$rootScope) {
     this.getLocation = function() {
          navigator.geolocation.getCurrentPosition(onSuccess, onError);
     }
-    function onSuccuess(position) {
+    function onSuccess(position) {
         $rootScope.lat =  position.coords.latitude;
         $rootScope.long = position.coords.longitude; 
     }
