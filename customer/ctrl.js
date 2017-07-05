@@ -293,10 +293,12 @@ angular
             // }
             // getLatLong2();
            GeoLocation.getLocation().then(function(position){
-                     AlertService.showError("App Error2", position);
-                     $scope.cust.latitude = position.lat;
-                     $scope.cust.longitude = position.long;
-                     $scope.getlatlong = false;
+                     AlertService.showError("App Error2", position.lat+":"+position.lng);
+                      $scope.$apply(function () {
+                         $scope.cust.latitude = position.lat;
+                         $scope.cust.longitude = position.lng;
+                         $scope.getlatlong = false;
+                      });
            }).catch(function(err){
                 AlertService.showError("App Error", error.msg);
            });
