@@ -293,6 +293,7 @@ angular
             // }
            // getLatLong2();
            GeoLocation.getLocation().then(function(position){
+                     AlertService.showError("App Error", position);
                      $scope.cust.latitude = position.lat;
                      $scope.cust.longitude = position.long;
                      $scope.getlatlong = false;
