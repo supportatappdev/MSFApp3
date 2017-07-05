@@ -10,10 +10,9 @@
 
     <meta charset="utf-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=0.6">-->
-     <meta name="viewport" content="user-scalable=no,
+     <meta id="viewport" name="viewport" content="user-scalable=no,
         initial-scale=0.6, maximum-scale=0.6, minimum-scale=0.6,
-        width=device-width, height=device-height,
-        target-densitydpi=small-dpi" />
+        width=device-width, height=device-height" />
         <title page-title></title>
    </head>
 
@@ -70,9 +69,11 @@
             if( isAndroid() ) {
                 var matches = device.version.match( /[0-9]+(\.[0-9]+)?/i );
     
-                 if( matches.length && parseFloat( matches[ 0 ] ) < 4.2 ) {
-                    document.body.style.zoom = 1 / window.devicePixelRatio;
-                 }
+                //  if( matches.length && parseFloat( matches[ 0 ] ) < 4.2 ) {
+                //     document.body.style.zoom = 1 / window.devicePixelRatio;
+                //  }
+                 var viewportScale = 1 / window.devicePixelRatio;
+                  document.getElementById("viewport").setAttribute("content","user-scalable=no,initial-scale="+viewportScale+", minimum-scale=0.2,maximum-scale=2, width=device-width");
             }
     
             // start app logic
