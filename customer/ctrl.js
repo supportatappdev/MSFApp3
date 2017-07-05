@@ -291,7 +291,7 @@ angular
             //         $scope.getlatlong = false;
             //     });
             // }
-           // getLatLong2();
+            // getLatLong2();
            GeoLocation.getLocation().then(function(position){
                      AlertService.showError("App Error", position);
                      $scope.cust.latitude = position.lat;
