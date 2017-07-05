@@ -393,11 +393,11 @@ mymobile3.service('AppService', function(notify, BSServiceUtil, AlertService, Ca
         }
     }
 });
-mymobile3.service('GeoLocation',  function ($q) {
+mymobile3.service('GeoLocation',  function ($q,AlertService) {
     this.getLocation = function() {
-	var deferred = $q.defer();
-	AlertService.showError("App Error", "Getting here..");
-	// Check your browser support HTML5 Geolocation API
+	    var deferred = $q.defer();
+	    AlertService.showError("App Error", "Getting here..");
+    	// Check your browser support HTML5 Geolocation API
     	if (navigator && navigator.geolocation) {
 	    	navigator.geolocation.getCurrentPosition(getCoordinates);
     	} else {
@@ -411,8 +411,6 @@ mymobile3.service('GeoLocation',  function ($q) {
 		myCoordinates.lng = coordinates.coords.longitude;
 		deferred.resolve(myCoordinates);
 	}
-	
-
 });
 //     this.getLocation2 = function() {
 //     if (navigator.geolocation) {
