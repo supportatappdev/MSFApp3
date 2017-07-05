@@ -281,6 +281,12 @@ angular
         var _operation = 'INSERT';
         var _custId = $stateParams.id;
         $scope.cust = {};
+        var init  = function() {
+            var callback = function() {
+                    $scope.getLatitudeLongitude();
+            }
+            AlertService.showConfirm("Warning","Do you want to capture customer location?",callback);
+        }
         $scope.getLatitudeLongitude = function() {
            $scope.getlatlong = true;
            GeoLocation.getLocation().then(function(position){
@@ -291,6 +297,7 @@ angular
                 AlertService.showError("App Error", error.msg);
            });
         }
+        init();
         // var getLatLong = function(callback) {
         //     // If adress is not supplied, use default value 'Ferrol, Galicia, Spain'
         //     if(!$scope.cust.addr_line1) {
