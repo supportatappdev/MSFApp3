@@ -407,6 +407,7 @@ mymobile3.service('GeoLocation',  function ($q,AlertService) {
     }
 	function getCoordinates(coordinates){
 		var myCoordinates = {};
+		 AlertService.showError("App Error", "Getting here..123");
 		myCoordinates.lat = coordinates.coords.latitude;
 		myCoordinates.lng = coordinates.coords.longitude;
 		deferred.resolve(myCoordinates);
