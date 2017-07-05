@@ -280,80 +280,44 @@ angular
         $("body").removeClass("mini-navbar");
         var _operation = 'INSERT';
         var _custId = $stateParams.id;
+        $scope.cust = {};
         $scope.getLatitudeLongitude = function() {
-            $scope.getlatlong = true;
-            // var callback = function(lat,long) {
-            //     $scope.$apply(function () {
-            //         // $scope.cust.latitude = lat;
-            //         // $scope.cust.longitude = long;
-            //         $scope.cust.latitude = $rootScope.lat;
-            //         $scope.cust.longitude = $rootScope.long;
-            //         $scope.getlatlong = false;
-            //     });
-            // }
-            // getLatLong2();
+           $scope.getlatlong = true;
            GeoLocation.getLocation().then(function(position){
-                    
-                      //$scope.$apply(function () {
-                       AlertService.showError("App Error0", position.lat+":"+position.lng);
-                         $scope.cust.latitude = position.lat;
-                          AlertService.showError("App Error1", position.lat+":"+position.lng);
-                         $scope.cust.longitude = position.lng;
-                          AlertService.showError("App Error2", position.lat+":"+position.lng);
-                         $scope.getlatlong = false;
-                      //});
+                    $scope.cust.latitude = position.lat;
+                    $scope.cust.longitude = position.lng;
+                    $scope.getlatlong = false;
            }).catch(function(err){
                 AlertService.showError("App Error", error.msg);
            });
         }
-        var getLatLong2 = function() {
-            getLocation();
-        }
-        $scope.cust = {};
-        var getLocation = function() {
-             navigator.geolocation.getCurrentPosition(onSuccess, onError);
-        }
-        function onSuccess(position) {
-            AlertService.showError("langlat", position.coords.latitude+":"+position.coords.longitude);
-            $scope.$apply(function () {
-                    // $scope.cust.latitude = lat;
-                    // $scope.cust.longitude = long;
-                    $scope.cust.latitude = position.coords.latitude;
-                    $scope.cust.longitude = position.coords.longitude;
-                    $scope.getlatlong = false;
-                });
-        }
-        function onError(error) {
-         AlertService.showError("App Error", error.message);
-        }
-        
-        var getLatLong = function(callback) {
-            // If adress is not supplied, use default value 'Ferrol, Galicia, Spain'
-            if(!$scope.cust.addr_line1) {
-                AlertService.showError("Validation Error","Please enter address");
-                return;
-            }
-            var _address = $scope.cust.addr_line1;
-            _address = angular.lowercase(_address);
-            if(_address.indexOf("hno") > -1 
-            || _address.indexOf("hno:") > -1) {
-                _address = _address.replace(/hno:/g, '');
-                _address = _address.replace(/hno/g, '');
-            }
-            // Initialize the Geocoder
-            geocoder = new google.maps.Geocoder();
-            if (geocoder) {
-                geocoder.geocode({
-                    'address': _address
-                }, function (result, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        callback(result[0].geometry.location.lat(),result[0].geometry.location.lng());
-                    } else {
-                           AlertService.showError("Validation Error","Not able to find locations, Please enter valid address");
-                    }
-                });
-            }
-        }
+        // var getLatLong = function(callback) {
+        //     // If adress is not supplied, use default value 'Ferrol, Galicia, Spain'
+        //     if(!$scope.cust.addr_line1) {
+        //         AlertService.showError("Validation Error","Please enter address");
+        //         return;
+        //     }
+        //     var _address = $scope.cust.addr_line1;
+        //     _address = angular.lowercase(_address);
+        //     if(_address.indexOf("hno") > -1 
+        //     || _address.indexOf("hno:") > -1) {
+        //         _address = _address.replace(/hno:/g, '');
+        //         _address = _address.replace(/hno/g, '');
+        //     }
+        //     // Initialize the Geocoder
+        //     geocoder = new google.maps.Geocoder();
+        //     if (geocoder) {
+        //         geocoder.geocode({
+        //             'address': _address
+        //         }, function (result, status) {
+        //             if (status == google.maps.GeocoderStatus.OK) {
+        //                 callback(result[0].geometry.location.lat(),result[0].geometry.location.lng());
+        //             } else {
+        //                   AlertService.showError("Validation Error","Not able to find locations, Please enter valid address");
+        //             }
+        //         });
+        //     }
+        // }
         var getCustomer = function() {
             var callback = function(result) {
                 $scope.cust = result[0];
