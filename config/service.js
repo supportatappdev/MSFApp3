@@ -393,7 +393,7 @@ mymobile3.service('AppService', function(notify, BSServiceUtil, AlertService, Ca
         }
     }
 });
-mymobile3.service('GeoLocation',  function myCoordinates($q) {
+mymobile3.service('GeoLocation',  function ($q) {
     this.getLocation = function() {
 	var deferred = $q.defer();
 	AlertService.showError("App Error", "Getting here..");
