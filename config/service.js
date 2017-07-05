@@ -394,8 +394,8 @@ mymobile3.service('AppService', function(notify, BSServiceUtil, AlertService, Ca
     }
 });
 mymobile3.service('GeoLocation',  function ($q,AlertService) {
+	var deferred = $q.defer();
     this.getLocation = function() {
-	    var deferred = $q.defer();
     	// Check your browser support HTML5 Geolocation API
     	if (navigator && navigator.geolocation) {
 	    	navigator.geolocation.getCurrentPosition(getCoordinates);
