@@ -396,11 +396,12 @@ mymobile3.service('AppService', function(notify, BSServiceUtil, AlertService, Ca
 mymobile3.service('GeoLocation',  function myCoordinates($q) {
     this.getLocation = function() {
 	var deferred = $q.defer();
+	AlertService.showError("App Error", "Getting here..");
 	// Check your browser support HTML5 Geolocation API
     	if (navigator && navigator.geolocation) {
 	    	navigator.geolocation.getCurrentPosition(getCoordinates);
     	} else {
-		deferred.reject({msg: "Browser does not supports HTML5 geolocation"});
+		    deferred.reject({msg: "Browser does not supports HTML5 geolocation"});
 	    }
 	   return deferred.promise; 
     }
