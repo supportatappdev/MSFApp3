@@ -70,12 +70,9 @@
             if( isAndroid() ) {
                 var matches = device.version.match( /[0-9]+(\.[0-9]+)?/i );
     
-                //if( matches.length && parseFloat( matches[ 0 ] ) < 4.2 ) {
-                  var contentWidth = document.body.scrollWidth, 
-                  windowWidth = window.innerWidth, 
-                  newScale = windowWidth / contentWidth;
-                  document.body.style.zoom = newScale;
-                //}
+                 if( matches.length && parseFloat( matches[ 0 ] ) < 4.2 ) {
+                    document.body.style.zoom = 1 / window.devicePixelRatio;
+                 }
             }
     
             // start app logic
