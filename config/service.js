@@ -393,25 +393,43 @@ mymobile3.service('AppService', function(notify, BSServiceUtil, AlertService, Ca
         }
     }
 });
-mymobile3.service('GeoLocation', function(AlertService,$rootScope) {
-    this.getLocation2 = function() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        AlertService.showError("App Error", "Geolocation is not supported by this device.");
-    }
-}
+mymobile3.factory('GeoLocation', ['$q', function myCoordinates($q) {
     this.getLocation = function() {
-         navigator.geolocation.getCurrentPosition(onSuccess, onError);
+	var deferred = $q.defer();
+	// Check your browser support HTML5 Geolocation API
+    	if (navigator && navigator.geolocation) {
+	    	navigator.geolocation.getCurrentPosition(getCoordinates);
+    	} else {
+		deferred.reject({msg: "Browser does not supports HTML5 geolocation"});
+	    }
     }
-    function onSuccess(position) {
-        $rootScope.lat =  position.coords.latitude;
-        $rootScope.long = position.coords.longitude; 
-    }
-    function onError(error) {
-        AlertService.showError("App Error", error.message);
-    }
-});
+	function getCoordinates(coordinates){
+		var myCoordinates = {};
+		myCoordinates.lat = coordinates.coords.latitude;
+		myCoordinates.lng = coordinates.coords.longitude;
+		deferred.resolve(myCoordinates);
+	}
+	return deferred.promise;
+
+}])
+//     this.getLocation2 = function() {
+//     if (navigator.geolocation) {
+//         navigator.geolocation.getCurrentPosition(showPosition);
+//     } else {
+//         AlertService.showError("App Error", "Geolocation is not supported by this device.");
+//     }
+// }
+//     this.getLocation = function() {
+//          navigator.geolocation.getCurrentPosition(onSuccess, onError);
+//     }
+//     function onSuccess(position) {
+//         $rootScope.lat =  position.coords.latitude;
+//         $rootScope.long = position.coords.longitude; 
+//     }
+//     function onError(error) {
+//         AlertService.showError("App Error", error.message);
+//     }
+//});
 
 mymobile3.service('Cache', function() {
     var map;
