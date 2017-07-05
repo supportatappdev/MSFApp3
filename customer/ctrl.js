@@ -306,7 +306,7 @@ angular
         var getLatLong2 = function() {
             getLocation();
         }
-        
+        $scope.cust = {};
         var getLocation = function() {
              navigator.geolocation.getCurrentPosition(onSuccess, onError);
         }
