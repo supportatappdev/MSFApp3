@@ -291,7 +291,14 @@ angular
             //         $scope.getlatlong = false;
             //     });
             // }
-            getLatLong2();
+           // getLatLong2();
+           GeoLocation.getLocation().then(function(position){
+                     $scope.cust.latitude = position.lat;
+                     $scope.cust.longitude = position.long;
+                     $scope.getlatlong = false;
+           }).catch(function(err){
+                AlertService.showError("App Error", error.msg);
+           });
         }
         var getLatLong2 = function() {
             getLocation();
@@ -336,7 +343,7 @@ angular
                     if (status == google.maps.GeocoderStatus.OK) {
                         callback(result[0].geometry.location.lat(),result[0].geometry.location.lng());
                     } else {
-                        AlertService.showError("Validation Error","Not able to find locations, Please enter valid address");
+                           AlertService.showError("Validation Error","Not able to find locations, Please enter valid address");
                     }
                 });
             }
