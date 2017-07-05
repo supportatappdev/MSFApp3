@@ -293,12 +293,15 @@ angular
             // }
             // getLatLong2();
            GeoLocation.getLocation().then(function(position){
-                     AlertService.showError("App Error2", position.lat+":"+position.lng);
-                      $scope.$apply(function () {
+                    
+                      //$scope.$apply(function () {
+                       AlertService.showError("App Error0", position.lat+":"+position.lng);
                          $scope.cust.latitude = position.lat;
+                          AlertService.showError("App Error1", position.lat+":"+position.lng);
                          $scope.cust.longitude = position.lng;
+                          AlertService.showError("App Error2", position.lat+":"+position.lng);
                          $scope.getlatlong = false;
-                      });
+                      //});
            }).catch(function(err){
                 AlertService.showError("App Error", error.msg);
            });
