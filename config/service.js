@@ -408,7 +408,7 @@ mymobile3.service('GeoLocation',  function ($q,AlertService) {
 		var myCoordinates = {};
 		myCoordinates.lat = coordinates.coords.latitude;
 		myCoordinates.lng = coordinates.coords.longitude;
-		AlertService.showError("App Error", myCoordinates.lat+":"+myCoordinates.lng);
+	//	AlertService.showError("App Error", myCoordinates.lat+":"+myCoordinates.lng);
 		deferred.resolve(myCoordinates);
 	}
 });
