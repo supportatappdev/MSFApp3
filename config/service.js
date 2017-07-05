@@ -393,7 +393,7 @@ mymobile3.service('AppService', function(notify, BSServiceUtil, AlertService, Ca
         }
     }
 });
-mymobile3.factory('GeoLocation', ['$q', function myCoordinates($q) {
+mymobile3.service('GeoLocation',  function myCoordinates($q) {
     this.getLocation = function() {
 	var deferred = $q.defer();
 	// Check your browser support HTML5 Geolocation API
@@ -402,6 +402,7 @@ mymobile3.factory('GeoLocation', ['$q', function myCoordinates($q) {
     	} else {
 		deferred.reject({msg: "Browser does not supports HTML5 geolocation"});
 	    }
+	   return deferred.promise; 
     }
 	function getCoordinates(coordinates){
 		var myCoordinates = {};
@@ -409,9 +410,9 @@ mymobile3.factory('GeoLocation', ['$q', function myCoordinates($q) {
 		myCoordinates.lng = coordinates.coords.longitude;
 		deferred.resolve(myCoordinates);
 	}
-	return deferred.promise;
+	
 
-}])
+});
 //     this.getLocation2 = function() {
 //     if (navigator.geolocation) {
 //         navigator.geolocation.getCurrentPosition(showPosition);
