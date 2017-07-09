@@ -78,7 +78,7 @@ angular
                 $location.path("/index/newcall/"+id);
             }
             if(!$scope.params.isStrartDay) {
-                AlertService.showConfirm("Warning","Your day haven't started yet. Do you wish to start yoru day?",callback);
+                AlertService.showConfirm("Info","Your day haven't started yet. Do you wish to start yoru day?",callback);
             } else {
                 callback();
             }
