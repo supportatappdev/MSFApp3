@@ -58,10 +58,53 @@
                            <input type="text" placeholder="State" ng-model="state" class="form-control">
                              </div>
                         </div>
+                        <div class="form-group"><label class="col-lg-2 control-label">Customer Type</label>
+                            <div class="col-lg-10">
+                          <done-select ng-model="customertype" ng-change="select()" 
+                          custom-object="SFCustomerTypeRef" 
+                          key-attribute="custtype_code" 
+                          label-attribute="custtype_name"></done-select>
+                        </div>
+                        </div>
+                         <div class="form-group"><label class="col-lg-2 control-label">Customer Group</label>
+                            <div class="col-lg-10">
+                          <done-select ng-model="customergroup" ng-change="select()" 
+                          custom-object="SFCustomerGroupRef" 
+                          key-attribute="custgrp_code" 
+                          label-attribute="custgrp_name"></done-select>
+                        </div>
+                        
+                     </div>
+                         <div class="form-group"><label class="col-lg-2 control-label">Channel</label>
+                            <div class="col-lg-10">
+                          <done-select ng-model="customerchannel" ng-change="select()" 
+                          custom-object="SFChannelRef" 
+                          key-attribute="channel_code" 
+                          label-attribute="channel_name"></done-select>
+                        </div>
+                        
+                     </div>
+                         <div class="form-group"><label class="col-lg-2 control-label">Trade Type</label>
+                            <div class="col-lg-10">
+                          <done-select ng-model="tradetype" 
+                          ng-change="select()" 
+                          simple-combo="Y" values="RR:Project Preimum,GT:General Trade"></done-select>
+                        </div>
+                        
+                     </div>
                          <div class="form-group"><label class="col-lg-2 control-label">JP Day</label>
                             <div class="col-lg-10">
-                          <input type="text" placeholder="Customer Name" ng-model="region" class="form-control">
-                              </div>
+                           <done-select ng-model="jpDay" 
+                          ng-change="select()" 
+                          simple-combo="Y" values="M:Monday,T:Tuesday,W:Wednesday,T:Thursday,F:Friday"></done-select>
+                            </div>
+                        </div>
+                         <div class="form-group"><label class="col-lg-2 control-label">Fortnight</label>
+                            <div class="col-lg-10">
+                           <done-select ng-model="fortnight" 
+                          ng-change="select()" 
+                          simple-combo="Y" values="0:1-3,1:2-4"></done-select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
@@ -70,6 +113,7 @@
                         </div>
                     </form>
                 </div>
+               
             </div>
         </div>
         <div>
