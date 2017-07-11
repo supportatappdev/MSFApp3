@@ -10,7 +10,8 @@
          'cgNotify',
           'oitozero.ngSweetAlert',
           'infinite-scroll',
-           'ngMap'
+           'ngMap',
+           'doneComponentsSet'
     ])
 })();
 
@@ -22,5 +23,5 @@ function getBaseURL() {
 function getAppName(p) {
    return "/";
 }
-var _appUrl = "http://ec2-54-145-121-147.compute-1.amazonaws.com:8180";//getBaseURL()+getAppName(window.location.pathname);
+var _appUrl = "http://202.53.13.76:8080/";//getBaseURL()+getAppName(window.location.pathname);
 
