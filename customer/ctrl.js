@@ -281,6 +281,9 @@ angular
         var _operation = 'INSERT';
         var _custId = $stateParams.id;
         $scope.cust = {};
+        //load types
+        
+        //-->END
         var init  = function() {
             var callback = function() {
                     $scope.getLatitudeLongitude();
